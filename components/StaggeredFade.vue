@@ -11,7 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
+import { watchAtMost } from '@vueuse/core'
 import { useMotion } from '@vueuse/motion'
 
 export type Props = {
@@ -99,13 +100,15 @@ function animateElement(el: HTMLElement, dynamicOrder: number) {
 			}
 		})
 
-		watch(
+		watchAtMost(
 			() => motion.isAnimating.value,
 			() => {
 				// Apply the permanent variant to elements that are outside the viewport
 				if (props.variantOnDone && !motion.isAnimating.value) {
 					motion.apply(props.variantOnDone)
 				}
+			}, {
+				count: 3
 			}
 		)
 	}, delay)
