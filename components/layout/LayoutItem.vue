@@ -1,13 +1,13 @@
 <template>
 	<div
-		class="grid col-span-full relative [&>*]:grid"
+		class="layout-item grid col-span-full md:relative"
 		:class="{
-			'[&>*]:col-start-2 [&>*]:col-end-5': variant === 'breakout',
-			'[&>*]:col-start-2 [&>*]:col-end-4': variant === 'breakout-l',
-			'[&>*]:col-start-3 [&>*]:col-end-5': variant === 'breakout-r',
-			'[&>*]:col-start-3 [&>*]:col-end-4': variant === 'full-contained',
-			'[&>*]:col-span-full': variant === 'full',
-			'col-start-3 col-end-4': !variant || variant === 'contained',
+			'[&>*]:col-[breakout]': variant === 'breakout',
+			'[&>*]:col-[contained] [&>*]:col-start-[breakout]': variant === 'breakout-l',
+			'[&>*]:col-[contained] [&>*]:col-end-[breakout]': variant === 'breakout-r',
+			'[&>*]:col-[contained]': variant === 'full-contained',
+			'[&>*]:col-[full]': variant === 'full',
+			'col-[contained]': !variant || variant === 'contained',
 			'grid-cols-[inherit]': variant && variant !== 'contained'
 		}"
 	>
